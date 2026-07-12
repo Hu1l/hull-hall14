@@ -7,6 +7,7 @@ tags:
   - Reflection
   - Philosophy
   - Plans
+  - Announcement
 snippet: >-
   Today, I have reposted almost every blog post that I find to be important in
   some way. This is my reflection.
