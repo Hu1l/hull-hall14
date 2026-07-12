@@ -14,30 +14,35 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-eleventyConfig.addCollection("tagList", function (collectionApi) {
-  const tagSet = new Set();
-  collectionApi.getFilteredByGlob("src/posts/*.md").forEach((item) => {
-    let tags = item.data.tags;
-    if (typeof tags === "string") {
-      tags = tags.split(",").map((s) => s.trim()).filter(Boolean);
-    }
-    (tags || []).forEach((tag) => tagSet.add(tag));
+  // Eleventy auto-wraps a "tags" string into a 1-item array before anything
+  // else touches it, so we normalize to an array first, then split every
+  // element on commas (covers both "Life, Math" and ["Life, Math"]).
+  function normalizeTags(tags) {
+    const arr = Array.isArray(tags) ? tags : typeof tags === "string" ? [tags] : [];
+    return arr
+      .flatMap((s) => String(s).split(","))
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  eleventyConfig.addCollection("tagList", function (collectionApi) {
+    const tagSet = new Set();
+    collectionApi.getFilteredByGlob("src/posts/*.md").forEach((item) => {
+      normalizeTags(item.data.tags).forEach((tag) => tagSet.add(tag));
+    });
+    return [...tagSet].sort((a, b) => a.localeCompare(b));
   });
-  return [...tagSet].sort((a, b) => a.localeCompare(b));
-});
+
+  eleventyConfig.addFilter("slugify", function (str) {
+    return String(str)
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  });
 
   eleventyConfig.addFilter("postsWithTag", function (posts, tag) {
-  return posts.filter((post) => {
-    let tags = post.data.tags;
-    if (typeof tags === "string") {
-      tags = tags.split(",").map((s) => s.trim()).filter(Boolean);
-    }
-    return (tags || []).includes(tag);
-  });
-});
-
-  eleventyConfig.addFilter("postsWithTag", function (posts, tag) {
-    return posts.filter((post) => (post.data.tags || []).includes(tag));
+    return posts.filter((post) => normalizeTags(post.data.tags).includes(tag));
   });
 
   return {
@@ -47,4 +52,5 @@ eleventyConfig.addCollection("tagList", function (collectionApi) {
       includes: "_includes"
     }
   };
+};
 };
