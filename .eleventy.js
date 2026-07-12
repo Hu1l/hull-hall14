@@ -14,14 +14,11 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  // Eleventy auto-wraps a "tags" string into a 1-item array before anything
-  // else touches it, so we normalize to an array first, then split every
-  // element on commas (covers both "Life, Math" and ["Life, Math"]).
   function normalizeTags(tags) {
     const arr = Array.isArray(tags) ? tags : typeof tags === "string" ? [tags] : [];
     return arr
-      .flatMap((s) => String(s).split(","))
-      .map((s) => s.trim())
+      .flatMap(function (s) { return String(s).split(","); })
+      .map(function (s) { return s.trim(); })
       .filter(Boolean);
   }
 
