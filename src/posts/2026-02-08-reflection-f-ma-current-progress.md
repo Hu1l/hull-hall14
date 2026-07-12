@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "Reflection: F=ma current progress"
+title: "Repost: F=ma current progress"
 date: 2026-02-08
 tags:
   - Life
