@@ -5,7 +5,7 @@ backend:
   branch: main
   # Replace with your actual Vercel domain once you know it, e.g.
   # https://hull-hall.vercel.app (no trailing slash).
-  base_url: https://YOUR-SITE-NAME.vercel.app
+  base_url: https://wjhull.vercel.app
   auth_endpoint: api/auth
 
 publish_mode: simple
