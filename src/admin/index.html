@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     <title>Write a Post — Hull Hall</title>
-    <!-- Pinned to a real, verified release on purpose. Decap CMS is
-         updated often; letting this float (e.g. "^3.0.0") means the
-         editor can silently switch to a new, sometimes buggy version
-         overnight. Bump this number deliberately if you ever want to
-         update — check the version exists at decapcms.org/docs/releases
-         or npmjs.com/package/decap-cms first. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -26,6 +20,18 @@
             min-height: 90px;
         }
     </style>
+</head>
+<body>
+    <!-- Pinned to a real, verified release on purpose. Decap CMS is
+         updated often; letting this float (e.g. "^3.0.0") means the
+         editor can silently switch to a new, sometimes buggy version
+         overnight. Bump this number deliberately if you ever want to
+         update — check the version exists at decapcms.org/docs/releases
+         or npmjs.com/package/decap-cms first.
+
+         This has to load here, at the end of <body>, not in <head> —
+         it injects itself into the page as soon as it loads, and needs
+         document.body to already exist when that happens. -->
     <script src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
     <script>
         // Shows the post the way it'll actually look on the live site
@@ -33,23 +39,6 @@
         // preview style.
         CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap");
         CMS.registerPreviewStyle("/style.css");
-
-        var PostPreview = createClass({
-            render: function () {
-                var entry = this.props.entry;
-                return h(
-                    "div",
-                    { className: "post-full", style: { maxWidth: "720px", margin: "20px auto" } },
-                    h("div", { className: "tag-list" }),
-                    h("h1", {}, entry.getIn(["data", "title"])),
-                    h("p", { className: "post-meta" }, String(entry.getIn(["data", "date"]) || "")),
-                    h("div", { className: "post-body" }, this.props.widgetFor("body"))
-                );
-            },
-        });
-        CMS.registerPreviewTemplate("posts", PostPreview);
     </script>
-</head>
-<body>
 </body>
 </html>
