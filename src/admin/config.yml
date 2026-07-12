@@ -46,7 +46,7 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
-        modes: ["rich_text, raw"]
+        modes: ["rich_text", "raw"]
         hint: "No length limit here — write as much as you want (3000+ words is completely fine). The box below is resizable: drag the bottom-right corner if you want more room."
 
   - name: "settings"
