@@ -8,7 +8,7 @@ tags:
   - Math
   - Physics
 snippet: This was Reposted on July 12, 2026, originally from my AOPS blog posted
-  at https://wjhull.vercel.app/admin/#/collections/posts/new
+  at https://artofproblemsolving.com/community/c4633801h3751188
 ---
 Scioly happened, and I did really good on it. I did soo good, that if I list what I got, I become identifiable, so just know that for my new year's goals, I have earned 2 points after getting the silver tier. It was far better than the requirements though. And all of that after one day of preparing.
 
