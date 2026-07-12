@@ -6,6 +6,7 @@ tags:
   - Life
   - Math
   - Reflection
+  - Plans
 snippet: This was Reposted on July 12, 2026, originally from my AOPS blog posted
   at
   https://artofproblemsolving.com/community/c4633801h3734964_reflection_after_missing_the_cutoffs
