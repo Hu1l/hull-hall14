@@ -4,7 +4,7 @@ title: "Repost: Goals for this year"
 date: 2026-01-04
 tags:
   - Life
-  - Goals
+  - Plans
   - Math
   - Physics
   - Reflection
