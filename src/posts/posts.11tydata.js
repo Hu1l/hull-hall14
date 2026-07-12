@@ -1,20 +1,15 @@
 module.exports = {
   eleventyComputed: {
-    // The admin panel's Tags field is now a plain comma-separated string
-    // (e.g. "Life, Books, Travel") instead of the old list widget, which
-    // had a habit of not responding to Enter/Add. This normalizes tags to
-    // an array either way, so old posts written with the previous
-    // array-style front matter (tags: ["Life"]) still work unchanged.
+    // Eleventy auto-wraps a "tags" string into a 1-item array before this
+    // ever runs, so we normalize to an array first, then split every
+    // element on commas (covers both "Life, Math" and ["Life, Math"]).
     tags: (data) => {
       const t = data.tags;
-      if (Array.isArray(t)) return t;
-      if (typeof t === "string") {
-        return t
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean);
-      }
-      return [];
+      const arr = Array.isArray(t) ? t : typeof t === "string" ? [t] : [];
+      return arr
+        .flatMap((s) => String(s).split(","))
+        .map((s) => s.trim())
+        .filter(Boolean);
     },
   },
 };
