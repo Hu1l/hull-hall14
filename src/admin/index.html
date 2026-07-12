@@ -7,17 +7,40 @@
     <title>Write a Post — Hull Hall</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Georgia&display=swap" rel="stylesheet">
     <style>
         /* Makes the editing boxes bigger and easier to work in. There is
            no actual character limit on Body or Tags — the default boxes
            were just small. .CodeMirror is CodeMirror's own class name
-           (used by the Body editor), not something Decap CMS hides. */
+           (used by the Body editor's Markdown tab), not something Decap
+           CMS hides. */
         .CodeMirror, .CodeMirror-scroll {
             min-height: 480px !important;
         }
         textarea {
             min-height: 90px;
+        }
+
+        /* Word-like writing feel for the Body field, both tabs:
+           - Markdown tab is CodeMirror
+           - Rich Text tab is a contenteditable area
+           Bigger serif-ish text, generous line spacing, and breathing
+           room on the sides so it reads like a document, not a code box. */
+        .CodeMirror,
+        [contenteditable="true"] {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 17px !important;
+            line-height: 1.7 !important;
+        }
+        .CodeMirror {
+            padding: 12px 6px;
+        }
+        [contenteditable="true"] {
+            padding: 16px 20px !important;
+            max-width: 720px;
+        }
+        [contenteditable="true"] p {
+            margin-bottom: 14px !important;
         }
     </style>
 </head>
