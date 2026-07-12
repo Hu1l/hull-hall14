@@ -26,13 +26,15 @@ eleventyConfig.addCollection("tagList", function (collectionApi) {
   return [...tagSet].sort((a, b) => a.localeCompare(b));
 });
 
-  eleventyConfig.addFilter("slugify", function (str) {
-    return String(str)
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
+  eleventyConfig.addFilter("postsWithTag", function (posts, tag) {
+  return posts.filter((post) => {
+    let tags = post.data.tags;
+    if (typeof tags === "string") {
+      tags = tags.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+    return (tags || []).includes(tag);
   });
+});
 
   eleventyConfig.addFilter("postsWithTag", function (posts, tag) {
     return posts.filter((post) => (post.data.tags || []).includes(tag));
