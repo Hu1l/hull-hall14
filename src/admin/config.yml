@@ -36,9 +36,9 @@ collections:
         hint: "Click the box to open the calendar and pick a day."
       - label: "Tags"
         name: "tags"
-        widget: "string"
-        hint: "Separate multiple tags with commas — e.g. Life, Books, Philosophy. You're not limited to any fixed list, and there's no need to press Enter or click Add."
-        default: "Life"
+        widget: "list"
+        hint: "Add one tag per line. Type a tag and press Enter (or click Add) to add it."
+        default: ["Life"]
       - label: "Snippet (short preview shown on the homepage)"
         name: "snippet"
         widget: "text"
