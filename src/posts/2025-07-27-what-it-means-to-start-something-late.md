@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: What It means to start something Late
+title: "Repost: What It means to start something Late"
 date: 2025-07-27
 tags: Life, Philosophy, Math
 snippet: This was Reposted on July 12, 2026, originally from my Wordpress blog
