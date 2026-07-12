@@ -14,13 +14,17 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addCollection("tagList", function (collectionApi) {
-    const tagSet = new Set();
-    collectionApi.getFilteredByGlob("src/posts/*.md").forEach((item) => {
-      (item.data.tags || []).forEach((tag) => tagSet.add(tag));
-    });
-    return [...tagSet].sort((a, b) => a.localeCompare(b));
+eleventyConfig.addCollection("tagList", function (collectionApi) {
+  const tagSet = new Set();
+  collectionApi.getFilteredByGlob("src/posts/*.md").forEach((item) => {
+    let tags = item.data.tags;
+    if (typeof tags === "string") {
+      tags = tags.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+    (tags || []).forEach((tag) => tagSet.add(tag));
   });
+  return [...tagSet].sort((a, b) => a.localeCompare(b));
+});
 
   eleventyConfig.addFilter("slugify", function (str) {
     return String(str)
