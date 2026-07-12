@@ -1,7 +1,7 @@
 backend:
   name: github
   # Replace with your own "username/repo-name" (see SETUP.txt, Step 3).
-  repo: wjhull/hull-hall14
+  repo: hu1l/hull-hall14
   branch: main
   # Replace with your actual Vercel domain once you know it, e.g.
   # https://hull-hall.vercel.app (no trailing slash).
