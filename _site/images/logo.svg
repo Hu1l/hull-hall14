@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="planetGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9CC4DA"/>
+      <stop offset="55%" stop-color="#628395"/>
+      <stop offset="100%" stop-color="#3B324E"/>
+    </linearGradient>
+    <clipPath id="ringBack">
+      <rect x="-8" y="-6" width="80" height="40" transform="rotate(-18 32 34)"/>
+    </clipPath>
+    <clipPath id="ringFront">
+      <rect x="-8" y="34" width="80" height="40" transform="rotate(-18 32 34)"/>
+    </clipPath>
+  </defs>
+
+  <!-- back half of the ring, behind the planet -->
+  <g clip-path="url(#ringBack)">
+    <ellipse cx="32" cy="34" rx="26" ry="9" transform="rotate(-18 32 34)"
+             fill="none" stroke="#41637A" stroke-width="3.5" opacity="0.55"/>
+  </g>
+
+  <!-- planet -->
+  <circle cx="32" cy="32" r="13.5" fill="url(#planetGrad)"/>
+
+  <!-- front half of the ring, in front of the planet -->
+  <g clip-path="url(#ringFront)">
+    <ellipse cx="32" cy="34" rx="26" ry="9" transform="rotate(-18 32 34)"
+             fill="none" stroke="#3B324E" stroke-width="3.5"/>
+  </g>
+</svg>
