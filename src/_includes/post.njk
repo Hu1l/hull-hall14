@@ -1,0 +1,41 @@
+---
+layout: base.njk
+---
+<a href="/" class="back-link">&larr; Back to all posts</a>
+<article class="post-full">
+    <div class="tag-list">
+        {% for tag in tags %}
+        <a href="/tags/{{ tag | slugify }}/" class="post-tag">{{ tag }}</a>
+        {% endfor %}
+    </div>
+    <h1>{{ title }}</h1>
+    <p class="post-meta">{{ date | readableDate }}</p>
+    <div class="post-body">
+        {{ content | safe }}
+    </div>
+
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <!-- Powered by giscus (github.com/giscus/giscus) — comments are
+             stored as GitHub Discussions on your repo, no database needed.
+             Replace the data-repo / data-repo-id / data-category-id values
+             below with your own from https://giscus.app once Discussions
+             is enabled on your GitHub repo. See SETUP.txt, "Turn on
+             comments," for the exact steps. -->
+        <script src="https://giscus.app/client.js"
+            data-repo="YOUR-GITHUB-USERNAME/YOUR-REPO-NAME"
+            data-repo-id="REPLACE_WITH_REPO_ID"
+            data-category="Comments"
+            data-category-id="REPLACE_WITH_CATEGORY_ID"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="light"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+        </script>
+    </div>
+</article>

@@ -1,0 +1,183 @@
+HULL HALL — SETUP & EDITING GUIDE (Vercel version)
+====================================================
+
+WHAT CHANGED IN THIS VERSION
+-------------------------------------
+- Hosting moved from Netlify to Vercel.
+- Admin login moved from Netlify Identity (invite + password) to
+  "Login with GitHub." Vercel has no equivalent to Netlify Identity,
+  so this was the most reliable replacement — see the honest note
+  below before you set it up.
+- Tags field: no more finicky "press Enter / click Add" list box.
+  You now just type tags separated by commas (e.g. Life, Books,
+  Travel) in one line.
+- Body editor is bigger and clearly labeled "no length limit" —
+  there never was a hard limit, the box was just small enough to
+  feel like one. It's also resizable (drag the bottom-right corner).
+- The admin preview pane now uses the site's actual stylesheet and
+  Playfair Display heading font, so what you see while writing
+  matches what readers see.
+
+A HONEST NOTE ON LOGIN
+-------------------------------------
+You'd originally asked for "invite yourself an email, set a
+password, log in with that password." That was Netlify Identity +
+Git Gateway — Netlify-only features that don't exist on Vercel (or
+anywhere else). There's no drop-in replacement that keeps that exact
+flow on another host.
+
+What this version uses instead: each writer logs in with their own
+GitHub account. To let someone write posts, you add them as a
+collaborator on your GitHub repo (GitHub Settings > Collaborators) —
+that's the Vercel-compatible equivalent of "inviting" someone. They
+don't need a password from you; they just need a GitHub account and
+your invite to the repo.
+
+If you'd genuinely rather stay on Netlify to keep the email+password
+flow (deprecated but still working), that's a valid choice too — say
+the word and I'll switch it back. This version assumes you want to
+move to Vercel as you asked.
+
+STEP 1 — Put this project on GitHub
+-------------------------------------
+- Unzip this folder on your computer.
+- Go to github.com and create a new repository (e.g. "hull-hall").
+  Public or private both work (private is fine — the OAuth login
+  below works either way).
+- Easiest no-command-line way: open your new empty repo, click
+  "Add file" > "Upload files," then drag in EVERY file and folder
+  from the unzipped project (including hidden ones like .eleventy.js
+  — turn on "show hidden files" if your system hides dotfiles).
+  Commit the upload.
+  (If you're comfortable with git: git init, git add ., git commit,
+  git remote add origin <your repo url>, git push -u origin main.)
+
+STEP 2 — Connect Vercel to that repo
+-------------------------------------
+- Go to vercel.com > "Add New" > "Project."
+- Import your GitHub repo. Vercel will read vercel.json automatically
+  (build command: npm run build, output directory: _site) — you
+  shouldn't need to change anything in the setup screen.
+- Click Deploy. Wait for the first build to finish — your site is
+  live at a vercel.app address (shown on the project's Overview tab).
+
+STEP 3 — Create a GitHub OAuth App (this replaces Identity)
+-------------------------------------
+- Go to github.com/settings/developers > "OAuth Apps" > "New OAuth App."
+- Application name: anything, e.g. "Hull Hall Admin."
+- Homepage URL: your Vercel URL, e.g. https://hull-hall.vercel.app
+- Authorization callback URL: same URL + /api/callback, e.g.
+  https://hull-hall.vercel.app/api/callback
+- Click "Register application."
+- You'll see a Client ID. Click "Generate a new client secret" and
+  copy both — you need them in the next step, and the secret is only
+  shown once.
+
+STEP 4 — Add the OAuth credentials to Vercel
+-------------------------------------
+- In your Vercel project, go to Settings > Environment Variables.
+- Add OAUTH_CLIENT_ID with the Client ID from Step 3.
+- Add OAUTH_CLIENT_SECRET with the Client Secret from Step 3.
+- Go to the Deployments tab and redeploy (env vars only apply to new
+  deployments) — or just push any small change to GitHub to trigger one.
+
+STEP 5 — Point config.yml at your repo and domain
+-------------------------------------
+- Open src/admin/config.yml in your repo (edit directly on GitHub, or
+  locally and push).
+- Replace YOUR-GITHUB-USERNAME/YOUR-REPO-NAME with your actual repo,
+  e.g. jane-doe/hull-hall.
+- Replace https://YOUR-SITE-NAME.vercel.app with your actual Vercel
+  domain from Step 2 (no trailing slash).
+- Commit/push. Vercel redeploys automatically.
+
+STEP 6 — Log in and write posts
+-------------------------------------
+- Go to https://YOUR-SITE-NAME.vercel.app/admin/
+- Click "Login with GitHub," authorize the app in the popup that
+  opens.
+- Click "New Blog Posts." Fill in Title, Date (click the box, a
+  calendar opens), Tags (comma-separated, e.g. Life, Books), a short
+  Snippet for the homepage preview, and the Body (no length limit).
+- Click "Publish now." Vercel rebuilds the site (usually under a
+  minute) and your post appears automatically.
+- If a post doesn't show up after a couple minutes, check the
+  "Deployments" tab in Vercel — it shows the exact build error
+  (most common cause: a typo in the frontmatter, like a missing
+  quote mark around a title).
+
+STEP 7 — Add more writers
+-------------------------------------
+- GitHub repo > Settings > Collaborators > "Add people."
+- They accept the invite, then log in at /admin/ with "Login with
+  GitHub" using their own GitHub account. No password from you needed.
+
+STEP 8 — Turn on comments
+-------------------------------------
+Comments use a free tool called giscus, which stores comments as
+GitHub Discussions on your repo — no separate database or account
+system for your readers to deal with beyond a GitHub login of their
+own.
+
+- On your GitHub repo, go to Settings > General > Features, and check
+  "Discussions."
+- Go to https://giscus.app and fill in your repo name where it asks.
+  It'll show green checkmarks once Discussions is detected.
+- Under "Discussion Category," create or pick one called "Comments."
+- Giscus will generate a script snippet with your specific
+  data-repo-id and data-category-id values filled in.
+- Open src/_includes/post.njk and replace the three placeholder
+  values (data-repo, data-repo-id, data-category-id) with the ones
+  giscus.app gave you. Commit and push — comments will appear at the
+  bottom of every post.
+- Note: commenters need a (free) GitHub account to leave a comment.
+
+HOW TO EDIT THINGS
+-------------------------------------
+Everything below can be done from /admin/ — you don't need to touch
+code for any of it.
+
+Change the site title or tagline:
+  /admin/ > "Site Settings" > "General." Edit the fields, publish.
+  (Under the hood this edits src/_data/site.json.)
+
+Add, edit, or delete a post:
+  /admin/ > "Blog Posts." Click an existing post to edit it, the trash
+  icon to delete it, or "New Blog Posts" to start one.
+
+Add a tag:
+  Type it into the Tags field, separated by commas if there's more
+  than one (e.g. Life, Books, Travel). No fixed list to update
+  elsewhere, and no Enter/Add button needed anymore.
+
+Invite someone else to write posts:
+  GitHub repo > Settings > Collaborators (see Step 7 above).
+
+Change colors or fonts:
+  Open src/style.css. The top of the file has a block like this:
+      :root {
+        --dark: #3B324E;    <- headings, sidebar text, dark accents
+        --primary: #628395; <- "Read more" links, meta text accents
+        --border: #C6CCDB;  <- divider lines between posts
+        --bg: #F6FAFF;      <- page background
+        ...
+      }
+  Change any of those hex codes and every place that color is used
+  updates automatically. The post titles and "Latest Posts" heading
+  use a serif font (Playfair Display) set via --serif-display a few
+  lines below. The admin panel's preview now uses this same file, so
+  it'll always match.
+
+Change the layout of a single post or the homepage:
+  src/_includes/post.njk controls a single post's page.
+  src/index.njk controls the homepage feed.
+  src/_includes/base.njk controls the sidebar and the overall page
+  shell that wraps every page.
+
+If something looks broken after an edit:
+  Check the "Deployments" tab in Vercel — it shows the exact error
+  from the last build. Most issues are a small typo (an unmatched
+  quote or bracket) in a file you just edited.
+
+That's the whole system: log in with GitHub, write, publish, and
+every future post follows this same loop.

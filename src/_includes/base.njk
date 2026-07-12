@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ description or site.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="shell">
+        <aside class="sidebar" aria-label="Blog navigation">
+            <a href="/" class="brand">
+                <img src="/images/logo.svg" alt="" class="brand-logo" width="40" height="40">
+                <span class="brand-text">
+                    <h1>{{ site.title }}</h1>
+                    <p>{{ site.tagline }}</p>
+                </span>
+            </a>
+
+            {% if collections.tagList.length %}
+            <div class="sidebar-section">
+                <h2>Filter by Tag</h2>
+                <div class="chip-row">
+                    {% for tag in collections.tagList %}
+                    <a href="/tags/{{ tag | slugify }}/" class="chip{% if page.url == '/tags/' + (tag | slugify) + '/' %} active{% endif %}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="sidebar-section">
+                <h2>All Posts</h2>
+                {% if collections.posts.length %}
+                <ul class="post-nav">
+                    {% for post in collections.posts %}
+                    <li>
+                        <a href="{{ post.url }}" class="{% if page.url == post.url %}active{% endif %}">
+                            {{ post.data.title }}
+                            <span class="nav-date">{{ post.data.date | readableDate }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="nav-empty">Nothing written yet.</p>
+                {% endif %}
+            </div>
+        </aside>
+
+        <main class="content" id="main-content">
+            {{ content | safe }}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+backend:
+  name: github
+  # Replace with your own "username/repo-name" (see SETUP.txt, Step 3).
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME
+  branch: main
+  # Replace with your actual Vercel domain once you know it, e.g.
+  # https://hull-hall.vercel.app (no trailing slash).
+  base_url: https://YOUR-SITE-NAME.vercel.app
+  auth_endpoint: api/auth
+
+publish_mode: simple
+media_folder: "src/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "src/posts"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post.njk" }
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        default: "{{now}}"
+        hint: "Click the box to open the calendar and pick a day."
+      - label: "Tags"
+        name: "tags"
+        widget: "string"
+        hint: "Separate multiple tags with commas — e.g. Life, Books, Philosophy. You're not limited to any fixed list, and there's no need to press Enter or click Add."
+        default: "Life"
+      - label: "Snippet (short preview shown on the homepage)"
+        name: "snippet"
+        widget: "text"
+        hint: "A sentence or two for the homepage preview card. Keep this short on purpose — the full post goes in Body below, which has no length limit."
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "No length limit here — write as much as you want (3000+ words is completely fine). The box below is resizable: drag the bottom-right corner if you want more room."
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General"
+        name: "general"
+        file: "src/_data/site.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string", hint: "Shown at the top of the sidebar and in the browser tab." }
+          - { label: "Tagline", name: "tagline", widget: "string", hint: "The short line under the site title." }
+          - { label: "Description (for search engines)", name: "description", widget: "string" }
