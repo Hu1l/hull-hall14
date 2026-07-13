@@ -1,3 +1,12 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Branding: shows your logo instead of Sveltia's default, and a custom
+# title on the login page / browser tab.
+app_title: "Hull Hall — Write"
+logo:
+  src: "/images/logo.svg"
+  show_in_header: true
+
 backend:
   name: github
   # Replace with your own "username/repo-name" (see SETUP.txt, Step 3).
@@ -8,14 +17,31 @@ backend:
   base_url: https://wjhull.vercel.app
   auth_endpoint: api/auth
 
+# Lets you point "View Site" / preview links at your real domain.
+site_url: https://wjhull.vercel.app
+
 publish_mode: simple
 media_folder: "src/images"
 public_folder: "/images"
+
+# Automatically converts uploaded images to WebP and resizes them —
+# keeps your repo/media folder from filling up with huge PNGs.
+media_libraries:
+  default:
+    config:
+      transformations:
+        webp:
+          quality: 85
+        resize:
+          width: 1600
+          height: 1600
+          fit: "scale-down"
 
 collections:
   - name: "posts"
     label: "Blog Posts"
     label_singular: "Post"
+    icon: "book"
     folder: "src/posts"
     create: true
     delete: true
@@ -24,6 +50,10 @@ collections:
     format: "frontmatter"
     summary: "{{title}} — {{date}}"
     sortable_fields: ["date", "title"]
+    view_groups:
+      - label: "Year"
+        field: "date"
+        pattern: "\\d{4}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "post.njk" }
       - { label: "Title", name: "title", widget: "string" }
@@ -51,6 +81,7 @@ collections:
 
   - name: "settings"
     label: "Site Settings"
+    icon: "settings"
     files:
       - label: "General"
         name: "general"
