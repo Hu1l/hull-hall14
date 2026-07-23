@@ -5,7 +5,7 @@ date: 2026-07-13
 tags:
   - Philosophy
   - Robotics
-snippet: I am going to have to lead my robotics team and some part of science oly this year, so I really have been thinking of what the best leader looks like, so I can become one of them and lead my team to be successful. I could not really get into a great conclusion and it is still an open question.
+snippet: I am going to have to lead my robotics team and some part of science olympiad this year, so I really have been thinking of what the best leader looks like, so I can become one of them and lead my team to be successful. I could not really get into a great conclusion and it is still an open question.
 ---
 
 I am going to have to lead my robotics team and some part of science oly this year, so I really have been thinking of what the best leader looks like, so I can become one of them and lead my team to be successful. With the world cup going on and the managers getting a lot of spotlight either if they are really good or bad. But one thing I would like to say is that there is a difference between a manager that leads the team and a captain of the team. The former is the one that leads the team but are not there while the team is performing, and the latter performs with the team. I want to focus more on the right captain. 
