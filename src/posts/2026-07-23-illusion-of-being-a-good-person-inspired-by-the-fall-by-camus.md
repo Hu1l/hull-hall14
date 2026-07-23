@@ -5,6 +5,7 @@ date: 2026-07-23
 tags:
   - Philosophy
   - Life
+  - Book
 snippet: This is my reflection about my self worth after reading The Fall by Camus. This post contains spoilers so do not read if you do not want spoilers.
 ---
 
