@@ -4,7 +4,7 @@ title: 'Repost: My Views on the new amc aime changes'
 date: 2026-08-29
 tags:
   - Math
-snippet: This was Reposted on July 12, 2026, originally from my AOPS blog posted at https://artofproblemsolving.com/community/c4633801h3894227_my_views_on_the_new_amc_aime_changes
+snippet: This was Reposted on August 29, 2026, originally from my AOPS blog posted at https://artofproblemsolving.com/community/c4633801h3894227_my_views_on_the_new_amc_aime_changes
 ---
 
 I just heard this news now, just because I wasn't really invested in math competitions after my life was ruined by a 96 cutoff. Math just became something that wasn't worth pursuing, and I turned to philosophy, engineering, and physics, which weren't too bad.
