@@ -30,12 +30,11 @@ media_libraries:
   default:
     config:
       transformations:
-        webp:
+        raster_image:
+          format: webp
           quality: 85
-        resize:
           width: 1600
           height: 1600
-          fit: "scale-down"
 
 collections:
   - name: "posts"
